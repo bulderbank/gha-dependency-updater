@@ -1,0 +1,32 @@
+name: Check for updates to Helm
+on: 
+  workflow_dispatch:
+  push:
+  schedule:
+    - cron:  '0 6 * * *'
+jobs:
+  check_for_update_job:
+    runs-on: ubuntu-latest
+    name: Check for updates to Helm
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Automatic Update of Given Dependency
+        uses: ./.github/ # Uses an action in the root directory
+        id: check_for_new_version
+        with:
+          path-to-file-with-version: "go.mod"
+          line-selector-for-version: "require github.com/prometheus/client_golang"
+          dependecy-organization-repo: "helm/helm"
+      - name: Create pull request if changes
+        uses: peter-evans/create-pull-request@4d3b0a48efaa29be1a91dbe756c93798daf406d5
+        with:
+          commit-message: "helm: upgrade Helm to version ${{ steps.check_for_new_version.outputs.new-version }}"
+          branch: "upgrade-helm-to-version-${{ steps.check_for_new_version.outputs.new-version }}"
+          title: "Upgrade Helm to version ${{ steps.check_for_new_version.outputs.new-version }}"
+          body: "${{ steps.check_for_new_version.outputs.release-url }}"
+          reviewers: jonasberdal, frealmyr
+     
+    

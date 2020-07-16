@@ -1,0 +1,26 @@
+# action.yml
+name: 'Automatic Update of Given Dependency'
+description: 'Check the given repository for new releases and compare with current version'
+inputs:
+  path-to-file:
+    description: 'Relative path to file where dependency is specified'
+    required: true
+  line-selector:
+    description: 'String or regex pattern of line with version'
+    required: true
+  dependecy-organization-repo:
+    description: 'The <org>/<repo> of the dependecy'
+    required: true
+outputs:
+  new-version:
+    description: 'The new version of the dependecy'
+  release-url:
+    description: 'The url of the release'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.path-to-file }}
+    - ${{ inputs.line-selector }}
+    - ${{ inputs.dependecy-organization-repo }}
+
