@@ -18,7 +18,7 @@ outputs:
     description: 'The url of the release'
 runs:
   using: 'docker'
-  image: 'docker://bulderbank/gha-dependency-updater:v0.0.1'
+  image: 'docker://bulderbank/gha-dependency-updater@sha256:155c8f17a9561271e00c5fc6b1d925c277cee9831b9556db95515e3ae0d75e5a'
   args:
     - ${{ inputs.path_to_file }}
     - ${{ inputs.line_selector }}
