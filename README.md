@@ -60,8 +60,6 @@ line_selector: "helm_version:[ ]+v[0-9]+\.[0-9]+\.[0-9]+"
 ```
 
 
-
-
 ## Outputs
 
 ```yaml
@@ -71,5 +69,9 @@ outputs:
   release_url:
     description: 'The url of the release'
 ```
+
+
+## Security
+When using any action you should always tag the action to a specific commit SHA. The same goes for uplodaed images used by the action. For this and future iterations of the action we will exclusively tag the image by the digest SHA. 
 
 
