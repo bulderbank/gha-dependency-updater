@@ -24,16 +24,16 @@ jobs:
         uses: bulderbank/gha-dependency-updater@<TAG_SHA> 
         id: update_version
         with:
-          path-to-file: "env/settings/settings.tfvar"
-          line-selector: "helm-version"
-          dependecy-organization-repo: "helm/helm"
+          path_to_file: "env/settings/settings.tfvar"
+          line_selector: "helm_version"
+          dependecy_organization_repo: "helm/helm"
       - name: Create pr if new release
         uses: peter-evans/create-pull-request@<TAG_SHA>
         with:
-          commit-message: "helm: upgrade Helm to version ${{ steps.update_version.outputs.new-version }}"
-          branch: "upgrade-helm-to-version-${{ steps.update_version.outputs.new-version }}"
-          title: "Upgrade Helm to version ${{ steps.update_version.outputs.new-version }}"
-          body: "${{ steps.update_version.outputs.release-url }}"
+          commit-message: "helm: upgrade Helm to version ${{ steps.update_version.outputs.newversion }}"
+          branch: "upgrade-helm-to-version-${{ steps.update_version.outputs.newversion }}"
+          title: "Upgrade Helm to version ${{ steps.update_version.outputs.newversion }}"
+          body: "${{ steps.update_version.outputs.release_url }}"
       
 ```
 
@@ -42,16 +42,23 @@ jobs:
 
 ```yaml
 inputs:
-  path-to-file:
+  path_to_file:
     description: 'Relative path to file where dependency is specified'
     required: true
-  line-selector:
-    description: 'A unique string or regex pattern of line with version'
+  line_selector:
+    description: 'A unique string or regex pattern (egrep) of line with version'
     required: true
-  dependecy-organization-repo:
+  dependecy_org_repo:
     description: 'The <org>/<repo> of the dependecy'
     required: true
 ```
+
+### Example regex pattern for the line selector:
+
+```yaml
+line_selector: "helm_version:[ ]+v[0-9]+\.[0-9]+\.[0-9]+"
+```
+
 
 
 
@@ -59,9 +66,9 @@ inputs:
 
 ```yaml
 outputs:
-  new-version:
+  new_version:
     description: 'The new version of the dependecy'
-  release-url:
+  release_url:
     description: 'The url of the release'
 ```
 

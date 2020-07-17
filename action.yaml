@@ -6,7 +6,7 @@ inputs:
     description: 'Relative path to file where dependency is specified'
     required: true
   line_selector:
-    description: 'String or regex pattern of line with version'
+    description: 'String or regex pattern (egrep) of line with version'
     required: true
   dependecy_org_repo:
     description: 'The <org>/<repo> of the dependecy'
