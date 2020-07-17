@@ -54,8 +54,3 @@ then
 else
     echo "Current version ($current_version) is the newest version"
 fi
-
-
-
-
-
