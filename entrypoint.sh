@@ -31,7 +31,7 @@ echo "Current dependency version: $current_version"
 echo
 
 
-newest_version=$(echo "$newest_releases" | sed -e "$ a $current_version" | sort -r --version-sort | head -n 1)
+newest_version=$(echo "$newest_releases" | sed -e "$ a $current_version" | sort -rV | head -n 1)
 
 # Because the current_version has been added to the version list, and the list is sorted by version
 # if newest_version != current_version, newest_version is a higher version than current_version.
