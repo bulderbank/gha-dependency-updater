@@ -72,6 +72,6 @@ outputs:
 
 
 ## Security
-When using any action you should always tag the action to a specific commit SHA. The same goes for uplodaed images used by the action. For this and future iterations of the action we will exclusively tag the image by the digest SHA. 
+When using any action you should always tag the action to a specific commit SHA. The same goes for uplodaded images used by the action. For this and future iterations of the action we will exclusively tag the image by the digest SHA. 
 
 
