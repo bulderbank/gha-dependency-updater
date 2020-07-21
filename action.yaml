@@ -1,0 +1,29 @@
+# action.yml
+name: 'Automatic Update of Given Dependency'
+description: 'Check the given repository for new releases and compare with current version'
+inputs:
+  path_to_file:
+    description: 'Relative path to file where dependency is specified'
+    required: true
+  line_selector:
+    description: 'String or regex pattern (egrep) of line with version'
+    required: true
+  dependecy_org_repo:
+    description: 'The <org>/<repo> of the dependecy'
+    required: true
+outputs:
+  new_version:
+    description: 'The new version of the dependecy'
+  release_url:
+    description: 'The url of the release'
+runs:
+  using: 'docker'
+  image: 'docker://bulderbank/gha-dependency-updater@sha256:7aaef0217bcc3c290f302f7db98b858720fd61f7de038b2fc2f9d42481d39d49'
+  args:
+    - ${{ inputs.path_to_file }}
+    - ${{ inputs.line_selector }}
+    - ${{ inputs.dependecy_org_repo }}
+branding:
+  icon: 'tag'  
+  color: 'red'
+    
