@@ -29,6 +29,7 @@ jobs:
           dependecy_organization_repo: "helm/helm"
       - name: Create pr if new release
         uses: peter-evans/create-pull-request@<TAG_SHA>
+        if: ${{ steps.update_version.outputs.new_version }}
         with:
           commit-message: "helm: upgrade Helm to version ${{ steps.update_version.outputs.newversion }}"
           branch: "upgrade-helm-to-version-${{ steps.update_version.outputs.newversion }}"
